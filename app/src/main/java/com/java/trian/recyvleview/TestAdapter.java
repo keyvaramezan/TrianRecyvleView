@@ -3,6 +3,7 @@ package com.java.trian.recyvleview;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class TestAdapter  extends RecyclerView.Adapter<TestAdapter.TestViewHolder> {
-    ArrayList<String> myList;
-    TestAdapter(ArrayList<String> list){
+    ArrayList<PersonClass> myList;
+    TestAdapter(ArrayList<PersonClass> list){
         myList = list;
     }
 
@@ -27,10 +28,10 @@ public class TestAdapter  extends RecyclerView.Adapter<TestAdapter.TestViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull TestViewHolder holder, int position) {
-       String name = myList.get(position);
-       holder.txtName.setText(name);
-
-
+       PersonClass person = myList.get(position);
+       holder.txtName.setText(person.getName() + person.getLastName());
+       holder.txtMobile.setText(person.getPhone());
+       holder.imgProfile.setImageResource(person.getPic());
     }
 
     @Override
@@ -40,9 +41,13 @@ public class TestAdapter  extends RecyclerView.Adapter<TestAdapter.TestViewHolde
 
     public class TestViewHolder extends RecyclerView.ViewHolder{
         TextView txtName;
+        TextView txtMobile;
+        ImageView imgProfile;
         public TestViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
+            txtMobile = itemView.findViewById(R.id.txtMobile);
+            imgProfile = itemView.findViewById(R.id.imgProfile);
         }
     }
 }
